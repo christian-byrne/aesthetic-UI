@@ -17,15 +17,8 @@ function renderOstaa() {
     dashboard.page.component.searchField("home purchases"),
     dashboard.page.component.listingForm("Post a Listing", "SELL"),
   ]);
-  dashboard.addRight([
-    dashboard.page.component.contactMeModal("name", "message", ["hi"]),
-    dashboard.page.component.vhsClock()
-  ]
-    // dashboard.page.component.notepad()
-  )
-  dashboard.page.layout.useFooter();
-  dashboard.page.functionality.collapsible.apply(dashboard.page.left.children);
 
+  dashboard.page.layout.useFooter();
   /**
    *
    * Display results from xhr queries to output container.
@@ -196,6 +189,11 @@ function renderOstaa() {
         document
           .querySelector("#left > div:nth-of-type(1)")
           .classList.toggle("active");
+      } else if (target.innerHTML == "Profile") {
+        document
+          .querySelector("#left > div:nth-of-type(2)")
+          .classList.toggle("active");
+        alert("user:" + sessionStorage.getItem("login"));
       } else if (target.innerHTML == "Purchases") {
         document
           .querySelector("#left > div:nth-of-type(3)")
@@ -204,6 +202,14 @@ function renderOstaa() {
         document.querySelector("#right").innerHTML =
           "This is information about the site. It is a peer-to-peer ecommerce hub called Ostaa.";
       }
+    }
+    // Collapse and expand sections.
+    else if (
+      target.tagName == "DIV" &&
+      target.id !== "left" &&
+      target.parentElement.id == "left"
+    ) {
+      target.classList.toggle("active");
     }
   });
 }

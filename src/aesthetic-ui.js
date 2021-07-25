@@ -10,32 +10,20 @@
  * @author Christian P. Byrne
  */
 
-import { apiRender, apiHandlers } from "./examples/api.js";
-import { loginRender, loginHandlers } from "./examples/login.js";
+import { loginRender, loginHandlers } from "./../page-templates/login/login.js";
 import renderOstaa from "./examples/dashboard-example.js";
+import showTime from "./../components/VHSclock/VHSclock.js";
+import renderNotepad from "./examples/notepad-example.js";
 
 const ENV = "production"; // "api-demo" | "dev" | "production"
 const URLS = ["http://127.0.0.1:5000", "http://143.198.57.139:80"];
 const BASE_URL = ENV === "dev" ? URLS[0] : URLS[1];
 
 /**
- * Create the dynamic stylesheet link node that is altered
- * when a new page is rendered. Loads first page (login),
- * then loads home page once session storage indicates logged
- * in status.
  * @listens window#load
  */
 window.onload = () => {
-  let dynamicStyle = document.createElement("link");
-  dynamicStyle.rel = "stylesheet";
-  dynamicStyle.data = "dynamic";
-  dynamicStyle.title = "dynamic";
-  document.querySelector("head").appendChild(dynamicStyle);
-  if (ENV === "api-demo") {
-    renderPage("api");
-  } else {
-    renderPage("home");
-  }
+  renderPage("home");
 };
 
 /**
@@ -44,14 +32,11 @@ window.onload = () => {
  */
 function renderPage(page) {
   if (!sessionStorage.getItem("login") || page === "login") {
-    // renderOstaa();
-    loginRender();
-    loginHandlers();
-  } else if (page === "api") {
-    apiRender();
-    apiHandlers();
+    renderNotepad();
+    // loginRender();
+    // loginHandlers();
   } else if (page === "home") {
-    renderOstaa();
+    renderNotepad();
   }
 }
 
@@ -65,7 +50,8 @@ function renderPage(page) {
  * @param {string} title        The title displayed on the toolbar.
  * @param {Object} [options={}]
  * @param {number} [options.mainElevation=3]
- * ...Object....
+ * @todo not going to doc things. If I was going to document this, I
+ *        would just port it to TS at this point.
  *
  */
 class TemplateEngine {
@@ -82,8 +68,13 @@ class TemplateEngine {
     };
     Object.assign(defaultOptions, options);
 
-    this.pages = defaultOptions.navItems;
+    if (!this.css._dynamicSheetLoaded()) {
+      this.css._loadRotatingSheet();
+    }
     this.dom.clear();
+    this.fonts.addAll();
+
+    this.pages = defaultOptions.navItems;
     this.stylesheets = window.document.styleSheets;
     this.rules;
     this.nav;
@@ -99,6 +90,7 @@ class TemplateEngine {
     document.body.appendChild(this.left);
     document.body.appendChild(this.right);
 
+    this.collapsibilityEnabled = false;
     // Set grid properties to body and main containers.
     this.gridTemplate = {};
     this.gridTemplate["gridTemplateAreas"] =
@@ -234,7 +226,7 @@ class TemplateEngine {
 
     /** @private */
     _push: (node, prepend, axis) => {
-      if (node.length && node.length > 1) {
+      if ((node.length && node.length > 1) || Array.isArray(node)) {
         for (let nodeElem of node) {
           if (!prepend) {
             this[axis].appendChild(nodeElem);
@@ -461,6 +453,13 @@ class TemplateEngine {
   };
 
   tag = {
+    button: (inner) => {
+      return this.constructNode({
+        tag: "button",
+        classes: ["custom", "windowsBtn"],
+        inner: inner
+      });
+    },
     /**
      * Create and return a div container.
      * @param {string} mainId Sets id property of returned node.
@@ -507,6 +506,200 @@ class TemplateEngine {
   };
 
   component = {
+    vhsClock: (options) => {
+      let children = [
+        this.constructNode({
+          tag: "h3",
+          classes: ["VHSclock", "glitch"],
+          propertiesMap: { id: "VHSclockTime" },
+        }),
+        this.constructNode({
+          tag: "h3",
+          classes: ["VHSclockBot", "glitch"],
+          propertiesMap: { id: "VHSclockDay" },
+        }),
+        this.constructNode({
+          tag: "h3",
+          classes: "glow",
+          propertiesMap: { id: "VHSclockGlow" },
+        }),
+      ];
+      const clockContainer = this.constructNode({ classes: "clockContainer" });
+      for (const sub of children) {
+        clockContainer.appendChild(sub);
+      }
+      const scanlines = this.constructNode({ classes: "scanlines" });
+      const mainContainer = this.constructNode({
+        classes: "custom",
+        styleMap: {
+          width: "max-content",
+          height: "min-content",
+          background: "#121212",
+        },
+      });
+      for (const child of [clockContainer, scanlines]) {
+        mainContainer.appendChild(child);
+      }
+      this.css.appendStylesheet("./components/VHSclock/VHSclock.css");
+      setTimeout(() => {
+        showTime();
+        setInterval(showTime, 1000 * 30);
+      }, 2000);
+      return mainContainer;
+    },
+    /**
+     *
+     * @param {options} options
+     * @returns {HTMLDivElement}
+     */
+    contactMeModal: (options) => {
+      this.css.appendStylesheet(
+        "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      );
+      this.css.appendStylesheet(
+        "./components/profile-widget/profile-widget.css"
+      );
+      const defaults = {
+        name: "Me",
+        collapsible: true,
+        expanderButton: false,
+        message: "Say hi",
+        socials: ["./"],
+        formMethod: "",
+        profilePic: "",
+        font1: "adventure",
+        font2: "berlinPixel",
+      };
+      Object.assign(defaults, options);
+      const socials = defaults.socials;
+      if (!defaults.expanderButton) {
+        for (const node of document.querySelectorAll("b")) {
+          if (node.innerHTML.toLowerCase().includes("profile")) {
+            defaults.expanderButton = node;
+            break;
+          }
+        }
+      } else {
+        if (typeof defaults.expanderButton === "string") {
+          defaults.expanderButton = document.querySelector(
+            defaults.expanderButton
+          );
+        }
+      }
+
+      const node = this.constructNode({
+        classes: "card",
+        propertiesMap: { id: "profileModal" },
+      });
+
+      if (defaults.collapsible) {
+        // Add collapse/expand fucntionality binded to the passed button.
+        document.documentElement.addEventListener("click", (event) => {
+          const caller = event.target;
+          if (caller === defaults.expanderButton) {
+            if (node.style.display === "block") {
+              node.style.display = "none";
+            } else {
+              node.style.display = "block";
+            }
+          } else if (!node.contains(caller)) {
+            // Click anywhere outside of widget hides it.
+            if (node.style.display === "block") {
+              node.style.display = "none";
+            }
+          }
+        });
+      } else {
+        node.style.setProperty("display: block !important");
+      }
+
+      document.documentElement.addEventListener("click", (event) => {
+        if (
+          Array.from(event.target.classList).includes("contact") &&
+          event.target.tagName == "BUTTON"
+        ) {
+          $(".card").toggleClass("active");
+          $(".banner").toggleClass("active");
+          $(".photo").toggleClass("active");
+          $(".social-media-banner").toggleClass("active");
+          $(".email-form").toggleClass("active");
+
+          if (document.getElementById("btnTxt").innerHTML == "back") {
+            document.getElementById("btnTxt").innerHTML = "click to contact me";
+          } else {
+            document.getElementById("btnTxt").innerHTML = "back";
+          }
+        }
+      });
+
+      node.innerHTML = `<a href="${defaults.socials[0]}" target="_blank">
+          <div class="photo"></div>
+        </a>
+        <div id="gifBanner" class="banner"></div>
+        <ul>
+            <li style="font-family: ${defaults.font1}; font-size: 1.85em">[${
+        defaults.name
+      }]</li>
+            <li style="font-family: ${
+              defaults.font2
+            }; font-size: .358em; padding-top:.85em">${defaults.message}</li>
+        </ul>
+        <button class="contact" id="main-button">
+          <p id="btnTxt" class="notMono" style="margin-top: .015em">click to contact me</p>
+        </button>
+        <div class="social-media-banner">
+            <a href="${
+              socials[0]
+            }" target="_blank"><i class="fa fa-github-square"></i></a>
+            <a href="${
+              socials.length > 1 ? socials[1] : ""
+            }" target="_blank"><i class="fa fa-hacker-news"></i></a>
+            <a href="${
+              socials.length > 2 ? socials[2] : ""
+            }" target="_blank"><i class="fa fa-codepen"></i></a>
+            <a href="${
+              socials.length > 3 ? socials[3] : ""
+            }"><i class="fa fa-linkedin"></i></a>
+        </div>
+        <form 
+          action="${defaults.formMethod}"
+          class="email-form"
+          method="post"
+          enctype="text/plain"
+          name="EmailForm"
+          >
+            <input id="name" type="text" placeholder="name">
+            <input id="email" type="text" placeholder="email">
+            <textarea id="comment" type="text" placeholder="comment"></textarea>
+            <input type="submit" class="contact">
+            <button >
+              <p id="botBtnTxt" style="margin-top: .2em">send</p>
+            </button>
+         </form>`;
+
+      return node;
+    },
+    notepad: (nodeID = "editor1") => {
+      this.scripts.append(
+        "https://cdn.ckeditor.com/4.5.1/standard/ckeditor.js"
+      );
+      let node = this.constructNode({
+        tag: "textarea",
+        classes: "custom",
+        propertiesMap: { rows: "1", cols: "200", id: nodeID },
+      });
+      setTimeout(() => {
+        window.CKEDITOR.editorConfig = function (config) {
+          config.language = "en";
+          config.uiColor = "#F7B42C";
+          config.height = 800;
+          config.toolbarCanCollapse = true;
+        };
+        window.CKEDITOR.replace("editor1");
+      }, 2000); // Let CDN script load...
+      // TODO should just preload CDN scripts I think.
+      return node;
+    },
     taskbar: (itemNames) => {
       let footer = this.container.box("footer");
       let nav = this.constructNode({
@@ -549,7 +742,7 @@ class TemplateEngine {
         "background-repeat": "no-repeat",
         "background-size": "cover",
         "background-repeat": "no-repeat",
-        "font-family": "font-SFAlienEncountersSolid",
+        "font-family": "SFAlienEncountersSolid",
         "-webkit-text-stroke-width": ".75px",
         "-webkit-text-stroke-color": "hsl(var(--secondary-darker))",
       };
@@ -660,7 +853,7 @@ class TemplateEngine {
         maskOptions["background-position"] = `${curr}% ${100 - curr / 2}%`;
         let itemNode = this.component.maskedtext(
           navItemText,
-          "img/windows-xp-bg.jpg",
+          "./media/windows-xp-bg.jpg",
           "b",
           maskOptions
         );
@@ -776,6 +969,10 @@ class TemplateEngine {
           { id: "purchases", value: "Get Purchases" },
         ];
       }
+      else {
+        boxArgs = type.boxArgs;
+        inputFields = type.inputFields
+      }
       const container = this.container.withTitle(...boxArgs);
       this.utils._batchAppendInputs(container, inputFields);
       return container;
@@ -800,7 +997,7 @@ class TemplateEngine {
 
     /** Append a footer section to page. */
     useFooter: (itemNames = false) => {
-      this.css.appendStylesheet("./css/navbar.css");
+      this.css.appendStylesheet("./components/navbar/navbar.css");
       this.footer.style.gridArea = "footer";
       document.body.appendChild(this.footer);
     },
@@ -825,32 +1022,140 @@ class TemplateEngine {
   };
 
   // ─── CSS UTILS ─────────────────────────────────────────────────────
-  css = {
-    addAdnimation: (node, animationClass = "vibrate") => {
-      node.addEventListener("click", function () {
-        let vibrate = () => {
-          this.classList.toggle(animationClass);
-        };
-        vibrate();
-        setTimeout(() => {
-          vibrate();
-        }, 500);
-      });
+  fonts = {
+    add: (category) => {
+      this.css.appendStylesheet(`./fonts/import-sheets/${category}.css`);
     },
-    addBorder: (node, keepOutline = false) => {
-      const themeBorder = {
-        "border-top": " 2px solid white",
-        "border-left": " 2px solid white",
-        "border-right": " 2px solid #393939",
-        "border-bottom": " 2px solid #393939",
-        "border-radius": " 0",
-      };
-      for (const [property, value] of Object.entries(themeBorder)) {
-        node.setStyle(property, value);
+    addAll: () => {
+      for (const category of [
+        "pixel-art-fonts",
+        "vaporwave-fonts",
+        "windows-fonts",
+      ]) {
+        this.fonts.add(category);
       }
-      if (!keepOutline) {
-        node.style.setProperty("--outline-width", "0px");
+    },
+  };
+
+  sylize = {
+    border: {
+      add: (node, keepOutline = false) => {
+        const themeBorder = {
+          "border-top": " 2px solid white",
+          "border-left": " 2px solid white",
+          "border-right": " 2px solid #393939",
+          "border-bottom": " 2px solid #393939",
+          "border-radius": " 0",
+        };
+        for (const [property, value] of Object.entries(themeBorder)) {
+          node.setStyle(property, value);
+        }
+        if (!keepOutline) {
+          node.style.setProperty("--outline-width", "0px");
+        }
+      },
+    },
+  };
+
+  functionality = {
+    animation: {
+      add: (node, animationClass = "vibrate") => {
+        node.addEventListener("click", function () {
+          let vibrate = () => {
+            this.classList.toggle(animationClass);
+          };
+          vibrate();
+          setTimeout(() => {
+            vibrate();
+          }, 500);
+        });
+      },
+    },
+    collapsible: {
+      exclusions: ["HEADER", "NAVBAR", "FOOTER", "B", "SPAN"],
+      _collapseChildren: (parent) => {
+        for (const child of parent.children) {
+          if (
+            !this.functionality.collapsible.exclusions.includes(child.tagName)
+          ) {
+            child.classList.toggle("collapsed-element");
+          }
+        }
+      },
+      apply: (nodes) => {
+        if (!this.collapsibilityEnabled) {
+          this.functionality.collapsible.enable();
+        }
+        if (nodes.length > 1) {
+          for (const node of nodes) {
+            if (
+              !this.functionality.collapsible.exclusions.includes(node.tagName)
+            ) {
+              node.classList.add("collapsibility-enabled");
+              this.functionality.collapsible._collapseChildren(node);
+            }
+          }
+        } else {
+          nodes.classList.add("collapsibility-enabled");
+          this.functionality.collapsible._collapseChildren(nodes);
+        }
+      },
+      enable: () => {
+        if (this.collapsibilityEnabled) {
+          return;
+        }
+        this.utils._appendStyleTag(
+          `.collapsed-element {
+            display: none !important;
+          }
+          .collapsbility-enabled {
+            cursor: pointer
+          }
+          .collapsbility-enabled:hover {
+            filter: brightness(1.25);
+            box-shadow: 2px 2px 2px black;
+          }`
+        );
+        this.collapsibilityEnabled = true;
+        document.documentElement.addEventListener("click", (event) => {
+          const caller = event.target;
+          if (Array.from(caller.classList).includes("collapsibility-enabled")) {
+            this.functionality.collapsible._collapseChildren(caller);
+          }
+        });
+      },
+    },
+  };
+
+  css = {
+    /** @returns {Boolean} false if the dynamic rotating link elem has not been created. */
+    _dynamicSheetLoaded: () => {
+      const rotatingSheet = Array.from(
+        document.querySelectorAll("link")
+      ).filter((link) => link.title == "dynamic");
+
+      if (rotatingSheet.length > 0) {
+        return rotatingSheet[0];
       }
+      return false;
+    },
+    _loadRotatingSheet: () => {
+      let rotatingSheet = this.css._createCSSLinkNode();
+      rotatingSheet.data = "dynamic";
+      rotatingSheet.title = "dynamic";
+      document.querySelector("head").appendChild(rotatingSheet);
+
+      // "this" should point to TemplateEngine instance, not event target.
+      rotatingSheet.addEventListener("load", () => {
+        setTimeout(() => {
+          this.stylesheets = window.document.styleSheets;
+        }, 150);
+      });
+      rotatingSheet.addEventListener("change", () => {
+        setTimeout(() => {
+          this.stylesheets = window.document.styleSheets;
+        }, 400);
+      });
     },
     /**
      * Fixes array when css delcarations are split with
@@ -930,43 +1235,53 @@ class TemplateEngine {
         }
       }, 200);
     },
-    appendStylesheet: (href) => {
+    /**
+     * @private
+     * @returns {HTMLLinkElement}
+     */
+    _createCSSLinkNode: () => {
       let link = document.createElement("link");
       link.rel = "stylesheet";
-      link.href = href;
-      document.querySelector("head").appendChild(link);
+      link.type = "text/css";
+      return link;
     },
-
     /**
-     * Update the dynamic stylesheet.
+     *
+     * @param {string} href
+     * @param {string} insertPoint  - Use a CSS selector string.
+     */
+    appendStylesheet: (href, insertPoint = "head") => {
+      let link = this.css._createCSSLinkNode();
+      link.href = href;
+      document.querySelector(insertPoint).appendChild(link);
+    },
+    prependStylesheet: (href, insertPoint = "head") => {
+      let link = this.css._createCSSLinkNode();
+      link.href = href;
+      document.querySelector(insertPoint).prepend(link);
+    },
+    /**
+     * Update the rotating stylesheet's href.
      * @param {string} href Relative path to stylesheet.
      */
     update: (href) => {
-      let links = document.querySelectorAll("link");
-      let dynamicLink;
-      for (let link of links) {
-        if (link.data === "dynamic") {
-          dynamicLink = link;
-        }
-      }
-      dynamicLink.href = href;
-      // dynamicLink.title = "dynamic";
-
-      // When loading new stylesheet, the styleSheets proeprty
-      // of the document object won't update untilt the sheet is
-      // rendered. Use the load event on a link element to get a
-      // fire when the resource has been fully loaded.
-
-      // TODO: this listener should not be re-bound evertime the sheet is updated, find a better way to only bind it once per instance?
-      dynamicLink.addEventListener("load", () => {
-        // Add another timeout in the case the parsing takes longer than loading.
-        setTimeout(() => {
-          this.stylesheets = window.document.styleSheets;
-        }, 150);
-      });
+      let sheet = this.css._dynamicSheetLoaded();
+      sheet.href = href;
     },
   };
 
+  scripts = {
+    append: (src) => {
+      let script = document.createElement("script");
+      script.src = src;
+      document.querySelector("head").append(script);
+    },
+    insertCode: (codeText) => {
+      let script = document.createElement("script");
+      script.innerHTML = codeText;
+      document.querySelector("head").appendChild(script);
+    },
+  };
   // ─── DOM UTILS ──────────────────────────────────────────────────
   dom = {
     /**
@@ -1079,64 +1394,64 @@ class TemplateEngine {
       "windows-stock",
       "ms_song",
       "Travis Sans MS",
-      "font-Pixel-Cowboy",
-      "font-stencil_pixel-7",
-      "font-BerlinFraktur-24",
-      "font-SFAlienEncountersSolid",
-      "font-Retroville-NC",
-      "font-vcr",
-      "font-wide_pixel-7",
-      "font-Retrolab",
-      "font-Donatello",
-      "font-Fipps-Regular",
-      "font-Streamster",
-      "font-Logo-Font",
-      "font-Donatello",
-      "font-SF-RetroSplice",
-      "font-sg05",
-      "font-SF-RetroSplice-Condensed",
-      "font-SFAlienEncounters",
-      "font-LearningCurve",
-      "font-SF-RetroSplice-SC-Condensed",
-      "font-SF-RetroSplice-Shaded",
+      "Pixel-Cowboy",
+      "stencil_pixel-7",
+      "BerlinFraktur-24",
+      "SFAlienEncountersSolid",
+      "Retroville-NC",
+      "vcr",
+      "wide_pixel-7",
+      "Retrolab",
+      "Donatello",
+      "Fipps-Regular",
+      "Streamster",
+      "Logo-Font",
+      "Donatello",
+      "SF-RetroSplice",
+      "sg05",
+      "SF-RetroSplice-Condensed",
+      "SFAlienEncounters",
+      "LearningCurve",
+      "SF-RetroSplice-SC-Condensed",
+      "SF-RetroSplice-Shaded",
       "f-Retroville-NC",
-      "font-VCR_OSD_MONO_1",
-      "font-paskowy",
-      "font-Extrude",
-      "font-Pixel-LCD-7",
-      "font-PixelByzantine",
-      "font-Adventurer",
-      "font-SF-RetroSplice-SC-Outline",
-      "font-Little-Snorlax",
-      "font-SF-RetroSplice-SC-Shaded",
-      "font-bubble_pixel-7",
-      "font-PressStart2P-vaV7",
-      "font-SF-RetroSplice-SC",
-      "font-Razor",
-      "font-Retrolab",
-      "font-Minecraftia-Regular",
-      "font-zx_spectrum-7",
-      "font-zadob",
-      "font-Little-bird",
-      "font-Angelface",
-      "font-H4VintageRetro",
-      "font-Frikativ",
-      "font-GaelleNumber3",
-      "font-Retron2000",
-      "font-Vermin-Vibes-1989",
-      "font-Sabo-Regular",
-      "font-nnumber",
-      "font-Retro-Gamer",
-      "font-hachicro",
-      "font-SFAlienEncounters-Italic",
-      "font-SFAlienEncountersSolid-Ital",
-      "font-SUPERSCR",
-      "font-alphbeta",
-      "font-windows",
-      "font-MetroRetroNF",
+      "VCR_OSD_MONO_1",
+      "paskowy",
+      "Extrude",
+      "Pixel-LCD-7",
+      "PixelByzantine",
+      "Adventurer",
+      "SF-RetroSplice-SC-Outline",
+      "Little-Snorlax",
+      "SF-RetroSplice-SC-Shaded",
+      "bubble_pixel-7",
+      "PressStart2P-vaV7",
+      "SF-RetroSplice-SC",
+      "Razor",
+      "Retrolab",
+      "Minecraftia-Regular",
+      "zx_spectrum-7",
+      "zadob",
+      "Little-bird",
+      "Angelface",
+      "H4VintageRetro",
+      "Frikativ",
+      "GaelleNumber3",
+      "Retron2000",
+      "Vermin-Vibes-1989",
+      "Sabo-Regular",
+      "nnumber",
+      "Retro-Gamer",
+      "hachicro",
+      "SFAlienEncounters-Italic",
+      "SFAlienEncountersSolid-Ital",
+      "SUPERSCR",
+      "alphbeta",
+      "windows",
+      "MetroRetroNF",
       "f-Adventurer",
-      "font-glitch",
-      "font-SF-RetroSplice-Outline",
+      "glitch",
+      "SF-RetroSplice-Outline",
     ];
   }
 }

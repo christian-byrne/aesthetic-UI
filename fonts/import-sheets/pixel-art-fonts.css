@@ -1,0 +1,56 @@
+@font-face {
+  font-family: adventure;
+  src: url("./../font-files/font-Adventurer.ttf") format("truetype");
+}
+@font-face {
+  font-family: berlinPixel;
+  src: url("./../font-files/font-BerlinFraktur-24.otf") format("truetype");
+}
+@font-face {
+  font-family: glitch;
+  src: url("./../font-files/font-glitch.ttf") format("truetype");
+}
+@font-face {
+  font-family: minecraft;
+  src: url("./../font-files/font-Minecraftia-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: pixelCowboy;
+  src: url("./../font-files/font-Pixel\ Cowboy.otf") format("truetype");
+}
+@font-face {
+  font-family: pixelLCD;
+  src: url("./../font-files/font-Pixel\ LCD-7.fon") format("truetype");
+}
+@font-face {
+  font-family: pixelByzantine;
+  src: url("./../font-files/font-PixelByzantine.ttf") format("truetype");
+}
+@font-face {
+  font-family: pressStart;
+  src: url("./../font-files/font-PressStart2P-vaV7.ttf") format("truetype");
+}
+@font-face {
+  font-family: retroGamer;
+  src: url("./../font-files/font-Retro\ Gamer.otf") format("truetype");
+}
+@font-face {
+  font-family: stencil_pixel-7;
+  src: url("./../font-files/font-stencil_pixel-7.ttf") format("truetype");
+}
+@font-face {
+  font-family: bubble_pixel-7;
+  src: url("./../font-files/font-bubble_pixel-7.ttf") format("truetype");
+}
+@font-face {
+  font-family: PressStart2P-vaV7;
+  src: url("./../font-files/font-PressStart2P-vaV7.ttf") format("truetype");
+}
+@font-face {
+  font-family: Donatello;
+  src: url("./../font-files/font-Donatello.otf") format("truetype");
+}
+@font-face {
+  font-family: wide_pixel-7;
+  src: url("./../font-files/font-wide_pixel-7.ttf") format("truetype");
+}
