@@ -1,0 +1,170 @@
+@font-face {
+  font-family: retrosplice;
+  src: url("./../font-files/font-SF\ RetroSplice\ SC\ Shaded.ttf") format("truetype");
+}
+@font-face {
+  font-family: vapor;
+  src: url("./../font-files/PLASMA\ SOUL\ 87.ttf") format("truetype");
+}
+@font-face {
+  font-family: retroLab;
+  src: url("./../font-files/font-Retrolab.ttf") format("truetype");
+}
+@font-face {
+  font-family: SFAlienEncountersSolid;
+  src: url("fonts/stylized/font-SFAlienEncountersSolid.ttf") format("truetype");
+}
+@font-face {
+  font-family: vcr;
+  src: url("fonts/stylized/font-vcr.ttf") format("truetype");
+}
+@font-face {
+  font-family: Fipps-Regular;
+  src: url("fonts/stylized/font-Fipps-Regular.otf") format("truetype");
+}
+@font-face {
+  font-family: Streamster;
+  src: url("fonts/stylized/font-Streamster.ttf") format("truetype");
+}
+@font-face {
+  font-family: Logo-Font;
+  src: url("fonts/stylized/font-Logo Font.otf") format("truetype");
+}
+@font-face {
+  font-family: sg05;
+  src: url("fonts/stylized/font-sg05.ttf") format("truetype");
+}
+@font-face {
+  font-family: SF-RetroSplice-Condensed;
+  src: url("fonts/stylized/font-SF RetroSplice Condensed.ttf")
+    format("truetype");
+}
+@font-face {
+  font-family: LearningCurve;
+  src: url("fonts/stylized/font-LearningCurve.ttf") format("truetype");
+}
+@font-face {
+  font-family: SF-RetroSplice-SC-Condensed;
+  src: url("fonts/stylized/font-SF RetroSplice SC Condensed.ttf")
+    format("truetype");
+}
+@font-face {
+  font-family: SF-RetroSplice-Shaded;
+  src: url("fonts/stylized/font-SF RetroSplice Shaded.ttf") format("truetype");
+}
+@font-face {
+  font-family: f-Retroville-NC;
+  src: url("fonts/stylized/f-Retroville NC.ttf") format("truetype");
+}
+@font-face {
+  font-family: VCR_OSD_MONO_1;
+  src: url("fonts/stylized/font-VCR_OSD_MONO_1.001.ttf") format("truetype");
+}
+@font-face {
+  font-family: paskowy;
+  src: url("fonts/stylized/font-paskowy.ttf") format("truetype");
+}
+@font-face {
+  font-family: Extrude;
+  src: url("fonts/stylized/font-Extrude.ttf") format("truetype");
+}
+@font-face {
+  font-family: SF-RetroSplice-SC-Outline;
+  src: url("fonts/stylized/font-SF RetroSplice SC Outline.ttf")
+    format("truetype");
+}
+@font-face {
+  font-family: Little-Snorlax;
+  src: url("fonts/stylized/font-Little Snorlax.ttf") format("truetype");
+}
+@font-face {
+  font-family: SF-RetroSplice-SC-Shaded;
+  src: url("fonts/stylized/font-SF RetroSplice SC Shaded.ttf")
+    format("truetype");
+}
+@font-face {
+  font-family: SF-RetroSplice-SC;
+  src: url("fonts/stylized/font-SF RetroSplice SC.ttf") format("truetype");
+}
+@font-face {
+  font-family: Razor;
+  src: url("fonts/stylized/font-Razor.otf") format("truetype");
+}
+@font-face {
+  font-family: Minecraftia-Regular;
+  src: url("fonts/stylized/font-Minecraftia-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: zx_spectrum-7;
+  src: url("fonts/stylized/font-zx_spectrum-7.ttf") format("truetype");
+}
+@font-face {
+  font-family: zadob;
+  src: url("fonts/stylized/font-zadob.ttf") format("truetype");
+}
+@font-face {
+  font-family: Little-bird;
+  src: url("fonts/stylized/font-Little bird.ttf") format("truetype");
+}
+@font-face {
+  font-family: Angelface;
+  src: url("fonts/stylized/font-Angelface.otf") format("truetype");
+}
+@font-face {
+  font-family: H4VintageRetro;
+  src: url("fonts/stylized/font-H4VintageRetro.ttf") format("truetype");
+}
+@font-face {
+  font-family: Frikativ;
+  src: url("fonts/stylized/font-Frikativ.ttf") format("truetype");
+}
+@font-face {
+  font-family: GaelleNumber3;
+  src: url("fonts/stylized/font-GaelleNumber3.ttf") format("truetype");
+}
+@font-face {
+  font-family: Retron2000;
+  src: url("fonts/stylized/font-Retron2000.ttf") format("truetype");
+}
+@font-face {
+  font-family: Vermin-Vibes-1989;
+  src: url("fonts/stylized/font-Vermin Vibes 1989.ttf") format("truetype");
+}
+@font-face {
+  font-family: Sabo-Regular;
+  src: url("fonts/stylized/font-Sabo-Regular.otf") format("truetype");
+}
+@font-face {
+  font-family: nnumber;
+  src: url("fonts/stylized/font-nnumber.ttf") format("truetype");
+}
+@font-face {
+  font-family: hachicro;
+  src: url("fonts/stylized/font-hachicro.ttf") format("truetype");
+}
+@font-face {
+  font-family: SFAlienEncounters-Italic;
+  src: url("fonts/stylized/font-SFAlienEncounters-Italic.ttf")
+    format("truetype");
+}
+@font-face {
+  font-family: SFAlienEncountersSolid-Ital;
+  src: url("fonts/stylized/font-SFAlienEncountersSolid-Ital.ttf")
+    format("truetype");
+}
+@font-face {
+  font-family: SUPERSCR;
+  src: url("fonts/stylized/font-SUPERSCR.TTF") format("truetype");
+}
+@font-face {
+  font-family: alphbeta;
+  src: url("fonts/stylized/font-alphbeta.ttf") format("truetype");
+}
+@font-face {
+  font-family: MetroRetroNF;
+  src: url("fonts/stylized/font-MetroRetroNF.ttf") format("truetype");
+}
+@font-face {
+  font-family: SF-RetroSplice-Outline;
+  src: url("fonts/stylized/font-SF RetroSplice Outline.ttf") format("truetype");
+}

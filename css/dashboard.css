@@ -1,0 +1,110 @@
+/*
+ * Name: Christian P. Byrne
+ * Course: CSC337 | Summer 2021
+ * Description: Stylesheet for the PA10 home page of the Ostaa shopping web app.
+ * 				Applying configuration value in conjunction with the mini framework in 
+ * 				the windows95-theme global stylesheet.
+ * 
+ */
+
+/* ─── LEFT ──────────────────────────────────────────────── */
+
+#left {
+  display: grid;
+  grid-template-columns: max-content;
+  grid-template-rows: min-content;
+}
+
+#left > div {
+  --elevation: 3.5;
+  cursor: pointer;
+}
+
+#left form {
+  --elevation: 4;
+}
+
+#left label {
+  --elevation: 2;
+}
+
+#left input {
+  --elevation: 3;
+}
+
+/* ─── RESPONSIVE ITEM GRID ────────────────────────────────── */
+
+#right {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+#right .item-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#right img {
+  width: 80%;
+  padding: 0 10%;
+  height: auto;
+}
+
+#right .description {
+  font-family: CascadiaCode-Light;
+  padding: 0 1.25ch;
+}
+
+#right .bot-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20%, 40%));
+}
+
+#right input {
+  display: block;
+  --elevation: 4;
+}
+
+#right .price,
+#right .status {
+  --primary-font: CascadiaMonoPL-SemiBold;
+  --elevation:1.5;
+  width: 100%;
+  display: inline;
+  font-weight: 600;
+  text-align: center;
+}
+
+#right .status {
+  --selected-color: 328deg, 59%, 88%;
+}
+
+#right .price {
+  --selected-color: 131deg, 55%, 84%;
+}
+
+#right .price::before {
+  content: "$";
+  width: 1ch;
+}
+
+/* ───────────────────────── COLLAPSABILITY ───── */
+
+label,
+input,
+button:not(.custom),
+form {
+  display: none;
+}
+.active label,
+.active input,
+.active button {
+  display: block;
+  text-align: center;
+  --primary-font: CascadiaCode-Light;
+}
+.active form {
+  display: grid;
+  grid-template-columns: repeat(2, min-content);
+  grid-template-rows: min-content;
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - LIPS Scheme code editor</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/codemirror@5.58.3/lib/codemirror.css'>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/codemirror@5.58.3/theme/twilight.css'><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!-- inspired by carbon.now.sh -->
+<!--
+TODO:
+  * resizable width
+-->
+<div class="box">
+    <header>
+        <button class="download">Screenshot</button>
+    </header>
+    <div class="wrapper">
+        <div class="cm-dialog">
+            <header>
+                <ul class="cm-icons">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </header>
+            <div class="cm-body"></div>
+        </div>
+    </div>
+</div>
+
+<template id="tmpl">
+<pre>
+(define foo /xxx/)
+(define bar "hello")
+
+(define baz &(:foo 10
+              :bar 20))
+
+(let iter ((i 10))
+  (unless (zero? i)
+    (display i)
+    (newline)
+    (iter (- i 1))))
+</pre>
+</template>
+<!-- partial -->
+  <script src='https://cdn.jsdelivr.net/npm/html2canvas'></script>
+<script src='https://cdn.jsdelivr.net/npm/codemirror@5.58.3/lib/codemirror.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/codemirror@5.58.3/mode/javascript/javascript.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/codemirror@5.58.3/addon/edit/matchbrackets.js'></script>
+<script src='https://cdn.jsdelivr.net/gh/jcubic/lips@devel/lib/js/codemirror.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>

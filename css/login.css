@@ -1,0 +1,61 @@
+/*
+ * Name: Christian P. Byrne
+ * Course: CSC337 | Summer 2021
+ * Description: Stylesheet for the PA10 Ostaa shopping web app login page.
+ * 				Applying configuration value in conjunction with the mini framework in 
+ * 				the windows95-theme global stylesheet.
+ * 
+ */
+
+/* Left -- Login / Register Forms */
+#left {
+  display: grid;
+  grid-template-columns: max-content;
+  grid-template-rows: min-content;
+}
+
+#left > div {
+  --elevation: 5;
+  cursor: pointer;
+}
+
+form {
+  --elevation: 2;
+}
+label {
+  --elevation: 2.5;
+}
+input {
+  --elevation: 3.5;
+}
+
+/* Right - Title Box */
+#right {
+  text-align: center;
+}
+
+/* Footer */
+#footer {
+  --elevation: 3;
+  grid-area: footer;
+}
+
+/* Toggle Visibility / Collapse Method */
+label,
+input,
+button,
+form {
+  display: none;
+}
+.active label,
+.active input,
+.active button {
+  display: block;
+  text-align: center;
+  --primary-font: CascadiaCode-Light;
+}
+.active form {
+  display: grid;
+  grid-template-columns: repeat(2, min-content);
+  grid-template-rows: min-content;
+}

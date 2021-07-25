@@ -1,0 +1,146 @@
+/*
+ * ─────────────────────────────────────────────────────────── CONSOLAS FONTS ─────
+ */
+
+@font-face {
+  font-family: consolas;
+  src: url("fonts/consolas/Consolas.ttf") format("truetype");
+}
+@font-face {
+  font-family: consolas-bold;
+  src: url("fonts/consolas/CONSOLAB.TTF") format("truetype");
+}
+@font-face {
+  font-family: consolas-italic;
+  src: url("fonts/consolas/consolai.ttf") format("truetype");
+}
+@font-face {
+  font-family: consolas-bold-italic;
+  src: url("fonts/consolas/consolaz.ttf") format("truetype");
+}
+
+/*
+ * ────────────────────────────────────────────────── CASCADIA CODE CMD FONTS ─────
+ */
+
+@font-face {
+  font-family: CascadiaMonoPL-SemiBold;
+  src: url("fonts/cmd/CascadiaMonoPL-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: CascadiaMonoPL-Light;
+  src: url("fonts/cmd/CascadiaMonoPL-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: CascadiaCode-Bold;
+  src: url("fonts/cmd/CascadiaCode-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: CascadiaCode-Light;
+  src: url("fonts/cmd/CascadiaCode-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: CascadiaMonoPL-Bold;
+  src: url("fonts/cmd/CascadiaMonoPL-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: CascadiaMono-ExtraLight;
+  src: url("fonts/cmd/CascadiaMono-ExtraLight.ttf") format("truetype");
+}
+@font-face {
+  font-family: CascadiaCodePL-Light;
+  src: url("fonts/cmd/CascadiaCodePL-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: CascadiaMono-SemiBold;
+  src: url("fonts/cmd/CascadiaMono-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: CascadiaCode-Regular;
+  src: url("fonts/cmd/CascadiaCode-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: CascadiaCode-SemiBold;
+  src: url("fonts/cmd/CascadiaCode-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: CascadiaCodePL-Regular;
+  src: url("fonts/cmd/CascadiaCodePL-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: CascadiaMonoPL-Regular;
+  src: url("fonts/cmd/CascadiaMonoPL-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: CascadiaMonoPL-ExtraLight;
+  src: url("fonts/cmd/CascadiaMonoPL-ExtraLight.ttf") format("truetype");
+}
+@font-face {
+  font-family: CascadiaCode-SemiLight;
+  src: url("fonts/cmd/CascadiaCode-SemiLight.ttf") format("truetype");
+}
+@font-face {
+  font-family: CascadiaCode-ExtraLight;
+  src: url("fonts/cmd/CascadiaCode-ExtraLight.ttf") format("truetype");
+}
+@font-face {
+  font-family: CascadiaCodePL-SemiLight;
+  src: url("fonts/cmd/CascadiaCodePL-SemiLight.ttf") format("truetype");
+}
+@font-face {
+  font-family: CascadiaMono-Light;
+  src: url("fonts/cmd/CascadiaMono-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: CascadiaCodePL-Bold;
+  src: url("fonts/cmd/CascadiaCodePL-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: CascadiaMono-Regular;
+  src: url("fonts/cmd/CascadiaMono-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: CascadiaCodePL-SemiBold;
+  src: url("fonts/cmd/CascadiaCodePL-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: CascadiaMono-Bold;
+  src: url("fonts/cmd/CascadiaMono-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: CascadiaMono-SemiLight;
+  src: url("fonts/cmd/CascadiaMono-SemiLight.ttf") format("truetype");
+}
+@font-face {
+  font-family: CascadiaMonoPL-SemiLight;
+  src: url("fonts/cmd/CascadiaMonoPL-SemiLight.ttf") format("truetype");
+}
+@font-face {
+  font-family: CascadiaCodePL-ExtraLight;
+  src: url("fonts/cmd/CascadiaCodePL-ExtraLight.ttf") format("truetype");
+}
+
+/*
+ * ────────────────────────────────────────────────────────────── STOCK FONTS ─────
+ */
+
+@font-face {
+  font-family: retro-windows;
+  src: url("fonts/stylized/font-windows.ttf") format("truetype");
+}
+@font-face {
+  font-family: Fresko_MS;
+  src: url("fonts/stock/Fresko_MS.ttf") format("truetype");
+}
+@font-face {
+  font-family: windows-stock;
+  src: url("fonts/stock/windows.ttf") format("truetype");
+}
+@font-face {
+  font-family: ms_song;
+  src: url("fonts/stock/ms_song.ttf") format("truetype");
+}
+@font-face {
+  font-family: Travis Sans MS;
+  src: url("fonts/stock/Travis Sans MS.ttf") format("truetype");
+}

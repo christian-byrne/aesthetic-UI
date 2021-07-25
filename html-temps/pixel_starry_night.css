@@ -1,0 +1,38 @@
+/*
+Error: Invalid CSS after "...box-shadow ($n)": expected "{", was "$value: '#{rand..."
+        on line 2 of /home/bymyself/Desktop/pixel_starry_night.scss
+
+1: @function multiple-box-shadow ($n) 
+2:   $value: '#{random(2000)}px #{random(2000)}px #FFF'
+3:   @for $i from 2 through $n
+4:     $value: '#{$value} , #{random(2000)}px #{random(2000)}px #FFF'
+5: 
+6:   @return unquote($value)
+7: 
+
+Backtrace:
+/home/bymyself/Desktop/pixel_starry_night.scss:2
+/usr/lib/ruby/vendor_ruby/sass/scss/parser.rb:1308:in `expected'
+/usr/lib/ruby/vendor_ruby/sass/scss/parser.rb:1238:in `expected'
+/usr/lib/ruby/vendor_ruby/sass/scss/parser.rb:1233:in `tok!'
+/usr/lib/ruby/vendor_ruby/sass/scss/parser.rb:688:in `block'
+/usr/lib/ruby/vendor_ruby/sass/scss/parser.rb:272:in `function_directive'
+/usr/lib/ruby/vendor_ruby/sass/scss/parser.rb:234:in `special_directive'
+/usr/lib/ruby/vendor_ruby/sass/scss/parser.rb:209:in `directive'
+/usr/lib/ruby/vendor_ruby/sass/scss/parser.rb:707:in `block_child'
+/usr/lib/ruby/vendor_ruby/sass/scss/parser.rb:697:in `block_contents'
+/usr/lib/ruby/vendor_ruby/sass/scss/parser.rb:137:in `stylesheet'
+/usr/lib/ruby/vendor_ruby/sass/scss/parser.rb:41:in `parse'
+/usr/lib/ruby/vendor_ruby/sass/engine.rb:414:in `_to_tree'
+/usr/lib/ruby/vendor_ruby/sass/engine.rb:389:in `_render_with_sourcemap'
+/usr/lib/ruby/vendor_ruby/sass/engine.rb:307:in `render_with_sourcemap'
+/usr/lib/ruby/vendor_ruby/sass/exec/sass_scss.rb:383:in `run'
+/usr/lib/ruby/vendor_ruby/sass/exec/sass_scss.rb:63:in `process_result'
+/usr/lib/ruby/vendor_ruby/sass/exec/base.rb:50:in `parse'
+/usr/lib/ruby/vendor_ruby/sass/exec/base.rb:18:in `parse!'
+/usr/bin/sass:8:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid CSS after \"...box-shadow ($n)\": expected \"{\", was \"$value: '#{rand...\"\A         on line 2 of /home/bymyself/Desktop/pixel_starry_night.scss\A \A 1: @function multiple-box-shadow ($n) \A 2:   $value: '#{random(2000)}px #{random(2000)}px #FFF'\A 3:   @for $i from 2 through $n\A 4:     $value: '#{$value} , #{random(2000)}px #{random(2000)}px #FFF'\A 5: \A 6:   @return unquote($value)\A 7: "; }

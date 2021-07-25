@@ -1,0 +1,200 @@
+
+
+/*   d8b   db d888888b d8b   db d8888b.  .d88b.  db   d8b   db .d8888.                 d8b   db d888888b 
+88   I8I   88   `88'   888o  88 88  `8D .8P  Y8. 88   I8I   88 88'  YP                 888o  88 `~~88~~' 
+88   I8I   88    88    88V8o 88 88   88 88    88 88   I8I   88 `8bo.                   88V8o 88    88    
+Y8   I8I   88    88    88 V8o88 88   88 88    88 Y8   I8I   88   `Y8b.                 88 V8o88    88    
+`8b d8'8b d8'   .88.   88  V888 88  .8D `8b  d8' `8b d8'8b d8' db   8D                 88  V888    88    
+ `8b8' `8d8'  Y888888P VP   V8P Y8888D'  `Y88P'   `8b8' `8d8'  `8888Y' C88888D C88888D VP   V8P    YP    
+                                                                                                       
+                eeeee e  eeeee e     eeeee eeeee             eeeee  eeeee e    e 
+                8   8 8  8   8 8     8  88 8   8             8   8  8  88 8    8 
+                8e  8 8e 8eee8 8e    8   8 8e                8eee8e 8   8 eeeeee 
+                88  8 88 88  8 88    8   8 88 "8             88   8 8   8 88   8 
+                88ee8 88 88  8 88eee 8eee8 88ee8             88eee8 8eee8 88   8 
+                                                eeeee eee*/        
+
+body {
+  margin: 0;
+  height: 100vh;
+
+  /* adjusted */
+  --size: 1;
+}
+
+.dialog {
+  /* adjusted */
+  position: relative;
+  font-size: 12px;
+  line-height: 14px;
+  margin: 0;
+
+  /* often adjusted per page */
+
+}
+
+.top,
+.line,
+.separator,
+.buttons-line,
+.bottom {
+  line-height: 1em;
+  
+}
+
+.dialog,
+.dialog button {
+  font-family: windows;
+}
+
+.dialog> :not(.box) {
+  display: none;
+}
+
+.dialog .cmd {
+  --color: #000;
+  --background: #aaa;
+  padding: 0;
+  
+}
+
+.dialog .cmd>span:not(.prompt) {
+  float: none;
+
+
+}
+
+@supports (--css: variables) {
+
+  .dialog,
+  .dialog button {
+    font-size: calc(var(--size, 1) * 12px);
+    line-height: calc(var(--size, 1) * 15px);
+  }
+}
+
+.dialog>.box {
+  background-color: #aaa;
+  float: left;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-box-shadow: calc(var(--char-width) * 2px) calc(var(--char-height) * 1px) black;
+  box-shadow: calc(var(--char-width) * 2px) calc(var(--char-height) * 1px) black;
+}
+
+.dialog .box .light {
+  color: #fff;
+}
+
+.dialog .box .dark {
+  color: #000;
+}
+
+.dialog .line {
+  float: left;
+  clear: both;
+  white-space: nowrap;
+}
+
+.dialog .box>.input .left,
+.dialog .box>.input .top,
+.dialog .box>.input .bottom,
+.dialog .box>.input .cmd,
+.dialog .box>.input .right {
+  display: inline-block;
+}
+
+.dialog .box>.buttons-line .left,
+.dialog .box>.buttons-line .buttons,
+.dialog .box>.buttons-line .right {
+  float: left;
+}
+
+.dialog .box>.input .cmd {
+  float: none;
+  margin-bottom: -4px;
+  overflow: hidden;
+}
+
+.dialog .box .title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+.dialog .box .title span {
+  background-color: #aaa;
+}
+
+.dialog .box .header span {
+  display: inline-block;
+}
+
+.dialog .box .buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.dialog .box button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  color: #555;
+  min-width: 87px;
+}
+
+.dialog .box button:active,
+.dialog .box button {
+  outline: none;
+}
+
+.dialog .box button:before {
+  content: '<';
+  float: left;
+}
+
+.dialog .box button:after {
+  content: '>';
+  float: right;
+}
+
+.dialog .box button:before,
+.dialog .box button:after {
+  display: inline-block;
+  color: #000;
+}
+
+.dialog .box button,
+.dialog .box button:before,
+.dialog .box button:after {
+  background-color: transparent;
+}
+
+.dialog .box button:not(.active) .mark {
+  color: #a00;
+}
+
+.dialog .box button.active,
+.dialog .box button.active:before,
+.dialog .box button.active:after {
+  background-color: #00a;
+}
+
+.dialog .box button.active {
+  color: #ff5;
+}
+
+.dialog .box button.active:before,
+.dialog .box button.active:after {
+  color: #fff;
+}
+
+.dialog .box button.active.selected .mark {
+  color: #00a;
+  background: #fff;
+}

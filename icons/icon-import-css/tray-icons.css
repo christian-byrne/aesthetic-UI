@@ -1,0 +1,66 @@
+
+.close-icon {
+  background-image: url('icons/close_focused_normal.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  aspect-ratio: 1 / 1;
+}
+
+.windows-icon {
+  background-image: url('icons/menu.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  aspect-ratio: 1 / 1;
+}
+
+.stepper-down-icon {
+  background-image: url('icons/stepper-down.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  aspect-ratio: 1 / 1;
+}
+
+.minimize-icon {
+  background-image: url('icons/minimize_focused_normal.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  aspect-ratio: 1 / 1;
+}
+
+.unmaximize-icon {
+  background-image: url('icons/unmaximize_focused_normal.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  aspect-ratio: 1 / 1;
+}
+
+.console-icon {
+  background-image: url('icons/console.ico');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  aspect-ratio: 1 / 1;
+}
